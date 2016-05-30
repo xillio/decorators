@@ -1,6 +1,8 @@
 /*
 Author: Marijn van der Zaag, Xillio
-Last updated: 18-02-2016
+Last updated: 30-05-2016
+
+version 1.0
 
 Description:
 This robot saves all standard decorators to the cache, after which you can
