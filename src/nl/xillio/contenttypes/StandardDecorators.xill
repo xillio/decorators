@@ -79,23 +79,25 @@ private function getDecoratorDefinitions() {
 		          "required" : true
 		     }
 		},
-		"revision" : {
-		    "created" : {
-		          "type" : "DATE",
-		          "required" : true,
-		     },
-		     "modified" : {
+		"modified" : {
+		     "date" : {
 		          "type" : "DATE",
 		          "required" : true
 		     },
-		     "createdBy" : {
+		     "by" : {
+		          "type" : "STRING",
+		          "required" : false
+		     }
+		},
+		"created" : {
+		     "date" : {
+		          "type" : "DATE",
+		          "required" : true,
+		     },
+		     "by" : {
 		          "type" : "STRING",
 		         
-		          "required" : true,
-		     },
-		     "modifiedBy" : {
-		          "type" : "STRING",
-		          "required" : true
+		          "required" : false,
 		     }
 		},
 		"parent" : {
