@@ -1,15 +1,15 @@
 /*
-Author: Marijn van der Zaag, Xillio
-Last updated: 30-05-2016
+Author: Marijn van der Zaag, Titus Nachbauer
+Last updated: 01-06-2016
 
-version 1.0
+version 1.1
 
 Description:
 This robot saves all standard decorators to the cache, after which you can
 create content types with them.
 
 Usage: include the robot and call:
-	var standardDecorators = getStandardDecorators();
+	var standardDecorators = getStandardDecorators("default");
 After that, you can use it to save a content type. For instance:
 	ContentType.save("file",[standardDecorators.file,standardDecorators.hash]);
 	
@@ -19,46 +19,46 @@ use ContentType, System, Collection;
 
 
 // Returns an object with all standard decorators with their names as keys
-function getStandardDecorators() {
+function getStandardDecorators(identity) {
     var decoratorDefinitions = getDecoratorDefinitions();
     var decorators = {};
     foreach(name,definition in decoratorDefinitions) {
-    	decorators[name] = newDecorator(name,definition);
+    	decorators[name] = newDecorator(name,definition, identity);
     }
     return decorators;
 }
 
 // Returns a decorator with the given name and definition
-private function newDecorator(name,definition) {
-	ContentType.decorator(name,definition);
+private function newDecorator(name, definition, identity) {
+	ContentType.decorator(name, definition, identity);
 	return name;
 }
 
 // Returns an object with all standard decorator definitions
 private function getDecoratorDefinitions() {
     var decorators = {
-		"file" : {
-		     "fullName" : {
-		          "type": "STRING",
-		          "required" : true
-		     },
-		     "name" : {
-		          "type": "STRING",
-		          "required" : true
-		     },
-		     "extension" : {
-		          "type": "STRING",
-		          "required": true
-		     },
-		     "path" : {
-		          "type" : "STRING",
-		          "required" : true
-		     },
-		     "size": {
-		          "type" : "NUMBER",
-		          "required": true
-		     }
-		},
+        "file" : {
+             "name" : {
+                  "type": "STRING",
+                  "required" : true
+             },
+             "extension" : {
+                  "type": "STRING",
+                  "required": true
+             },
+             "rawExtension" : {
+                  "type": "STRING",
+                  "required": false
+             },
+             "path" : {
+                  "type" : "STRING",
+                  "required" : true
+             },
+             "size": {
+                  "type" : "NUMBER",
+                  "required": true
+             }
+        },
 		"hash" : {
 		     "md5" : {
 		          "type" : "STRING",
