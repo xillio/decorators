@@ -11,7 +11,7 @@ create content types with them.
 Usage: include the robot and call:
 	var standardDecorators = getStandardDecorators("default");
 After that, you can use it to save a content type. For instance:
-	ContentType.save("file",[standardDecorators.file,standardDecorators.hash]);
+	ContentType.save("file",[standardDecorators.file,standardDecorators.hash],"default");
 	
 Make sure you do not use standard decorator names for custom decorators.
 */
