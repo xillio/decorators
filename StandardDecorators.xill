@@ -1,8 +1,8 @@
 /*
 Author: Marijn van der Zaag, Titus Nachbauer
-Last updated: 01-06-2016
+Last updated: 22-06-2016
 
-version 1.1
+version 1.2
 
 Description:
 This robot saves all standard decorators to the cache, after which you can
@@ -18,137 +18,122 @@ Make sure you do not use standard decorator names for custom decorators.
 use ContentType, System, Collection;
 
 
-// Returns an object with all standard decorators with their names as keys
-function getStandardDecorators(identity) {
-    var decoratorDefinitions = getDecoratorDefinitions();
-    var decorators = {};
-    foreach(name,definition in decoratorDefinitions) {
-    	decorators[name] = newDecorator(name,definition, identity);
+var decorators = {
+    "file" : {
+         "name" : {
+              "type": "STRING",
+              "required" : true
+         },
+         "extension" : {
+              "type": "STRING",
+              "required": true
+         },
+         "rawExtension" : {
+              "type": "STRING",
+              "required": false
+         },
+         "path" : {
+              "type" : "STRING",
+              "required" : true
+         },
+         "size": {
+              "type" : "NUMBER",
+              "required": true
+         }
+    },
+	"hash" : {
+	     "md5" : {
+	          "type" : "STRING",
+	          "required": true
+	     }
+	},
+	"mimeType" : {
+	     "type" : {
+	          "type" : "STRING",
+	          "required" : true
+	     }
+	},
+	"document" : {
+	    "title" : {
+	          "type" : "STRING",
+	          "required" : true
+	     },
+	     "author" : {
+	          "type" : "STRING",
+	          "required" : true
+	     }
+	},
+	"modified" : {
+	     "date" : {
+	          "type" : "DATE",
+	          "required" : true
+	     },
+	     "by" : {
+	          "type" : "STRING",
+	          "required" : false
+	     }
+	},
+	"created" : {
+	     "date" : {
+	          "type" : "DATE",
+	          "required" : true,
+	     },
+	     "by" : {
+	          "type" : "STRING",
+	         
+	          "required" : false,
+	     }
+	},
+	"parent" : {
+	     "id" : {
+	          "type" : "STRING",
+	          "required" : true
+	     },
+	     "path" : {
+	          "type" : "STRING",
+	          "required" : true
+	     }
+	},
+	"folder" : {
+	     "name": {
+	          "type": "STRING",
+	          "required": true
+	     },
+	     "path" : {
+	         "type": "STRING",
+	          "required": true
+	     }
+	},
+	"folderStatistics" : {
+	      "folderCount" : {
+	          "type" : "NUMBER",
+	          "required" : true
+	     },
+	     "fileCount" : {
+	          "type" : "NUMBER",
+	          "required" : true
+	     }
+	},
+	"permissions" : {
+	    "users" : {
+	        "type" : "LIST",
+	        "required" : true
+	    },
+	       
+	    "groups" : {
+	        "type" : "LIST",
+	        "required" : true
+	    }
+	},
+	"audit" : {
+	    "events" : {
+	        "type" : "LIST",
+	        "required" : true
+	    }
     }
-    return decorators;
-}
-
-// Returns a decorator with the given name and definition
-private function newDecorator(name, definition, identity) {
-	ContentType.decorator(name, definition, identity);
-	return name;
-}
+};
 
 // Returns an object with all standard decorator definitions
 private function getDecoratorDefinitions() {
-    var decorators = {
-        "file" : {
-             "name" : {
-                  "type": "STRING",
-                  "required" : true
-             },
-             "extension" : {
-                  "type": "STRING",
-                  "required": true
-             },
-             "rawExtension" : {
-                  "type": "STRING",
-                  "required": false
-             },
-             "path" : {
-                  "type" : "STRING",
-                  "required" : true
-             },
-             "size": {
-                  "type" : "NUMBER",
-                  "required": true
-             }
-        },
-		"hash" : {
-		     "md5" : {
-		          "type" : "STRING",
-		          "required": true
-		     }
-		},
-		"mimeType" : {
-		     "type" : {
-		          "type" : "STRING",
-		          "required" : true
-		     }
-		},
-		"document" : {
-		    "title" : {
-		          "type" : "STRING",
-		          "required" : true
-		     },
-		     "author" : {
-		          "type" : "STRING",
-		          "required" : true
-		     }
-		},
-		"modified" : {
-		     "date" : {
-		          "type" : "DATE",
-		          "required" : true
-		     },
-		     "by" : {
-		          "type" : "STRING",
-		          "required" : false
-		     }
-		},
-		"created" : {
-		     "date" : {
-		          "type" : "DATE",
-		          "required" : true,
-		     },
-		     "by" : {
-		          "type" : "STRING",
-		         
-		          "required" : false,
-		     }
-		},
-		"parent" : {
-		     "id" : {
-		          "type" : "STRING",
-		          "required" : true
-		     },
-		     "path" : {
-		          "type" : "STRING",
-		          "required" : true
-		     }
-		},
-		"folder" : {
-		     "name": {
-		          "type": "STRING",
-		          "required": true
-		     },
-		     "path" : {
-		         "type": "STRING",
-		          "required": true
-		     }
-		},
-		"folderStatistics" : {
-		      "folderCount" : {
-		          "type" : "NUMBER",
-		          "required" : true
-		     },
-		     "fileCount" : {
-		          "type" : "NUMBER",
-		          "required" : true
-		     }
-		},
-		"permissions" : {
-		    "users" : {
-		        "type" : "LIST",
-		        "required" : true
-		    },
-		       
-		    "groups" : {
-		        "type" : "LIST",
-		        "required" : true
-		    }
-		},
-		"audit" : {
-		    "events" : {
-		        "type" : "LIST",
-		        "required" : true
-		    }
-	    }
-	};
-    return decorators;
+   return decorators;
 }
