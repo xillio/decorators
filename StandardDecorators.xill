@@ -1,37 +1,34 @@
 /*
 Author: Marijn van der Zaag, Titus Nachbauer
-Last updated: 01-06-2016
+Last updated: 23-06-2016
 
-version 1.1
+version 1.2
 
 Description:
 This robot saves all standard decorators to the cache, after which you can
 create content types with them.
 
 Usage: include the robot and call:
-	var standardDecorators = getStandardDecorators("default");
+	registerStandardDecorators("default");
 After that, you can use it to save a content type. For instance:
-	ContentType.save("file",[standardDecorators.file,standardDecorators.hash],"default");
+	ContentType.save("file",["file","hash"],"default");
 	
 Make sure you do not use standard decorator names for custom decorators.
 */
-use ContentType, System, Collection;
+use ContentType;
 
 
 // Returns an object with all standard decorators with their names as keys
-function getStandardDecorators(identity) {
+function registerStandardDecorators(identity) {
     var decoratorDefinitions = getDecoratorDefinitions();
-    var decorators = {};
     foreach(name,definition in decoratorDefinitions) {
-    	decorators[name] = newDecorator(name,definition, identity);
+    	newDecorator(name,definition, identity);
     }
-    return decorators;
 }
 
 // Returns a decorator with the given name and definition
 private function newDecorator(name, definition, identity) {
 	ContentType.decorator(name, definition, identity);
-	return name;
 }
 
 // Returns an object with all standard decorator definitions
