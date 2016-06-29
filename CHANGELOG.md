@@ -1,7 +1,7 @@
 # Decorators - Change Log
 UDM standard decorators defined by Xillio
 
-## [1.2] - unreleased
+## [1.2] - 29-06-2016
 ### Change
 - Remove gradle build files
 - Restructure repository

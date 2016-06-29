@@ -18,7 +18,7 @@ Make sure you do not use standard decorator names for custom decorators.
 use ContentType;
 
 
-// Returns an object with all standard decorators with their names as keys
+// Registers the standard decorators
 function registerStandardDecorators(identity) {
     var decoratorDefinitions = getDecoratorDefinitions();
     foreach(name,definition in decoratorDefinitions) {
@@ -26,7 +26,7 @@ function registerStandardDecorators(identity) {
     }
 }
 
-// Returns a decorator with the given name and definition
+// Regusters a decorator with the given name and definition
 private function newDecorator(name, definition, identity) {
 	ContentType.decorator(name, definition, identity);
 }
